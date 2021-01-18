@@ -16,7 +16,7 @@ namespace CoffeApparat
         }
 
        CoffeBuilder coffeBuilder;
-        Coffe coffe;
+       Coffe coffe;
        public List<string> VarietyList { get; private set; }
        public List<string> SyrupList { get; private set; }
        string selectedSyrup;
@@ -26,6 +26,17 @@ namespace CoffeApparat
        bool milk;
        uint sugar;
        bool rb1, rb2, rb3, rb4;
+        string check;
+
+        public string Check
+        {
+            get { return check; }
+            set { 
+                
+               check = value;
+                OnPropertyChanged("Check");
+            }
+        }
 
         public uint Sugar
         {
@@ -127,9 +138,12 @@ namespace CoffeApparat
             VarietyList = new List<string>() { "Робуста", "Либерика", "Арабика", "Эксцельза","МакКофе 3в1" };
             SyrupList = new List<string>() { "Карамель", "Мята", "Корица", "Яблоко", "Апельсин" };
             AddedSyrupsList = new List<string>();
+
             SelectedSyrup = SyrupList[0];
             rb1 = true;
             Sugar = 0;
+            Rb1 = true;
+            OnPropertyChanged("Rb1");
         }
 
         public MyCommand AddSyrup
@@ -140,6 +154,22 @@ namespace CoffeApparat
                 AddedSyrupsList = new List<string>(AddedSyrupsList);
                 OnPropertyChanged("AddedSyrupsList");
             });}
+        }
+
+        public MyCommand CheckPlease
+        {
+            get
+            {
+                return new MyCommand((o) =>
+                {
+                    coffe = coffeBuilder.getCoffe();
+                    coffe.Milk = milk;
+                    coffe.Sugar = sugar;
+                    coffe.Syrup = AddedSyrupsList;
+                    coffe.Variety = SelectedVariety;
+                    Check= coffe.Check();
+                });
+            }
         }
     }
 }

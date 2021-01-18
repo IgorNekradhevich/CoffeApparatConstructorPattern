@@ -15,6 +15,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Label Content="{Binding Check, UpdateSourceTrigger=PropertyChanged}"></Label>
         <StackPanel Margin="10,10,10,10" Grid.Column="1">
             <Label>Сорт зерен</Label>
             <ComboBox SelectedItem="{Binding SelectedVariety,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding VarietyList}" Margin="0,0,0,10"></ComboBox>
@@ -26,7 +27,7 @@
             <Label>Сахар</Label>
             <Label  Content="{Binding Sugar, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
             <Slider Value="{Binding Sugar, UpdateSourceTrigger=PropertyChanged}" Maximum="15"></Slider>
-            <Button>Добавить</Button>
+           
             
         </StackPanel>
         <StackPanel Margin="10,10,10,10" Grid.Column="2">
@@ -34,7 +35,7 @@
             <RadioButton IsChecked="{Binding Rb2, UpdateSourceTrigger=PropertyChanged}">Эспрессо</RadioButton>
             <RadioButton IsChecked="{Binding Rb3, UpdateSourceTrigger=PropertyChanged}">Американо</RadioButton>
             <RadioButton IsChecked="{Binding Rb4, UpdateSourceTrigger=PropertyChanged}">Свой вариант</RadioButton>
-            <Button Margin="0,50,0,0">Выдать чек</Button>
+            <Button Command="{Binding CheckPlease}" Margin="0,50,0,0">Выдать чек</Button>
         </StackPanel>
     </Grid>
 </Window>
